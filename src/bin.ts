@@ -13,7 +13,7 @@ if (argv == null || argv.length < 1) {
   throw new Error('Choose a command\n' + cmdPattern);
 }
 
-const dir = ''; // node_modules/dnscrypt-proxy/
+const dir = 'node_modules/dcpc/'; // ''
 const map: object = {
   restart: `node ${dir}dist/bin.stop.js; forever restart ${dir}dist/bin.start.js`,
   start: `forever start ${dir}dist/bin.start.js`,

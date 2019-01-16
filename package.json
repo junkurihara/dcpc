@@ -5,10 +5,22 @@
   "main": "dist/index.js",
   "author": "Jun Kurihara",
   "license": "MIT",
-  "private": true,
   "bin": {
     "dcpc": "dist/bin.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junkurihara/dcpc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/junkurihara/dcpc/issues"
+  },
+  "homepage": "https://github.com/junkurihara/dcpc/tree/master/packages/dcpc#readme",
+  "keywords": [
+    "dnscrypt",
+    "doh",
+    "dnscrypt-proxy"
+  ],
   "scripts": {
     "test": "nyc mocha --recursive $(find test -name '*.spec.ts')",
     "test:bundle": "yarn webpack && cross-env TEST_ENV=bundle yarn test",
