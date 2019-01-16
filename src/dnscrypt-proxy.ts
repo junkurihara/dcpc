@@ -4,7 +4,6 @@
 
 import child_process from 'child_process';
 import path from 'path';
-import sudo from 'sudo-prompt';
 
 const name: string = 'dnscrypt proxy';
 // const icns: string = ''; // icns: '/Applications/Electron.app/Contents/Resources/Electron.icns', // (optional)
@@ -46,19 +45,15 @@ export default class {
   public start_dnscrypt() {
     const options = { name }; // or {name, icns}
     const cmd = `"${this.binary}" -config "${this.cfgFile}"`;
-    return this.sexec(cmd, options);
-  }
-
-  public stop_dnscrypt() {
-    const options = { name }; // or {name, icns}
-    const cmd = 'pgrep dnscrypt-proxy|xargs kill';
+    // const options: string[] = ['-config', `"${this.cfgFile}"`];
+    // const cmd = `"${this.binary}"`;
     return this.sexec(cmd, options);
   }
 
   // todo: this daemonize function should not be sudo?
   private sexec(cmd: string, options: object) {
     return new Promise( (resolve, reject) => {
-      //sudo.exec(cmd, options, (error: Error, stdout: any, stderr: any) => {
+      // child_process.execFile(cmd, options, (error: any, stdout: any, stderr: any) => {
       child_process.exec(cmd, options, (error: any, stdout: any, stderr: any) => {
           if (error) { reject(error); }
           resolve({stdout, stderr});

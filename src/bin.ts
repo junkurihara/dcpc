@@ -21,9 +21,9 @@ const forever = path.resolve(__dirname, '../node_modules/.bin/forever');
 const opt = '-l /var/log/dcpc.log -a';
 
 const map: object = {
-  restart: `node "${stop}"; "${forever}" restart ${opt} "${start}"`,
+  restart: `"${forever}" restart ${opt} "${start}"`,
   start: `"${forever}" start ${opt} "${start}"`,
-  stop: `"${forever}" stop ${opt} "${start}"; node "${stop}"`,
+  stop: `"${forever}" stop ${opt} "${start}"`,
 };
 
 // @ts-ignore

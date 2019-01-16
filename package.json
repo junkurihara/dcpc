@@ -44,7 +44,6 @@
     "typescript": "3.2.2"
   },
   "dependencies": {
-    "forever": "^0.15.3",
-    "sudo-prompt": "^8.2.5"
+    "forever": "^0.15.3"
   }
 }
