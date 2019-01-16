@@ -15,9 +15,9 @@ if (argv == null || argv.length < 1) {
 
 const dir = 'node_modules/dcpc/'; // ''
 const map: object = {
-  restart: `node ${dir}dist/bin.stop.js; forever restart ${dir}dist/bin.start.js`,
-  start: `forever start ${dir}dist/bin.start.js`,
-  stop: `forever stop ${dir}dist/bin.start.js; node ${dir}dist/bin.stop.js`,
+  restart: `node ${dir}dist/bin.stop.js; node_modules/.bin/forever restart ${dir}dist/bin.start.js`,
+  start: `node_modules/.bin/forever start ${dir}dist/bin.start.js`,
+  stop: `node_modules/.bin/forever stop ${dir}dist/bin.start.js; node ${dir}dist/bin.stop.js`,
 };
 
 // @ts-ignore
