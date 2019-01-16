@@ -2,6 +2,7 @@
  * dnscrypt-proxy.ts
  */
 
+import child_process from 'child_process';
 import path from 'path';
 import sudo from 'sudo-prompt';
 
@@ -10,27 +11,27 @@ const name: string = 'dnscrypt proxy';
 
 export default class {
   private config: object;
+  private readonly binary: string;
+  private readonly cfgFile: string;
+
   constructor(config: object) {
     this.config = config;
-  }
+    this.cfgFile = '';
+    this.binary = '';
 
-  public start_dnscrypt() {
-    const options = { name }; // or {name, icns}
-    const platform: string|undefined = process.platform;
-    const arch: string|undefined = process.arch;
-    let cmd;
+    const platform: string | undefined = process.platform;
+    const arch: string | undefined = process.arch;
+
     switch (platform) {
       case 'darwin': {
-        const binary: string = path.resolve(__dirname, '../lib/darwin/dnscrypt-proxy');
-        const config: string = path.resolve(__dirname, '../config/dnscrypt-proxy_darwin.toml');
-        cmd = `"${binary}" -config "${config}"`;
+        this.binary = path.resolve(__dirname, '../lib/darwin/dnscrypt-proxy');
+        this.cfgFile = path.resolve(__dirname, '../config/dnscrypt-proxy_darwin.toml');
         break;
       }
       case 'linux': {
-        const config: string = path.resolve(__dirname, '../config/dnscrypt-proxy_linux.toml');
+        this.cfgFile = path.resolve(__dirname, '../config/dnscrypt-proxy_linux.toml');
         if (arch === 'x64') {
-          const binary: string = path.resolve(__dirname, '../lib/linux-x86_64/dnscrypt-proxy');
-          cmd = `"${binary}" -config "${config}"`;
+          this.binary = path.resolve(__dirname, '../lib/linux-x86_64/dnscrypt-proxy');
         } else {
           throw new Error('Unsupported architecture');
         }
@@ -40,21 +41,29 @@ export default class {
         throw new Error('Unsupported platform');
       }
     }
-    sudo.exec(cmd, options, (error: Error, stdout: any, stderr: any) => {
-        if (error) { throw error; }
-        console.log('stdout: ' + stdout);
-        console.log('stderr: ' + stderr);
-      },
-    );
+  }
+
+  public start_dnscrypt() {
+    const options = { name }; // or {name, icns}
+    const cmd = `"${this.binary}" -config "${this.cfgFile}"`;
+    return this.sexec(cmd, options);
   }
 
   public stop_dnscrypt() {
     const options = { name }; // or {name, icns}
-    sudo.exec('pgrep dnscrypt-proxy|xargs kill', options, (error: Error, stdout: any, stderr: any) => {
-        if (error) { throw error; }
-        console.log('stdout: ' + stdout);
-        console.log('stderr: ' + stderr);
-      },
-    );
+    const cmd = 'pgrep dnscrypt-proxy|xargs kill';
+    return this.sexec(cmd, options);
+  }
+
+  // todo: this daemonize function should not be sudo?
+  private sexec(cmd: string, options: object) {
+    return new Promise( (resolve, reject) => {
+      //sudo.exec(cmd, options, (error: Error, stdout: any, stderr: any) => {
+      child_process.exec(cmd, options, (error: any, stdout: any, stderr: any) => {
+          if (error) { reject(error); }
+          resolve({stdout, stderr});
+        },
+      );
+    });
   }
 }

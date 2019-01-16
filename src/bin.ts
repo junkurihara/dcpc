@@ -18,10 +18,12 @@ const start = path.resolve(__dirname, '../dist/bin.start.js');
 const stop = path.resolve(__dirname, '../dist/bin.stop.js');
 const forever = path.resolve(__dirname, '../node_modules/.bin/forever');
 
+const opt = '-l /var/log/dcpc.log';
+
 const map: object = {
-  restart: `node "${stop}"; "${forever}" restart "${start}"`,
-  start: `"${forever}" start "${start}"`,
-  stop: `"${forever}" stop "${start}"; node "${stop}"`,
+  restart: `node "${stop}"; "${forever}" restart ${opt} "${start}"`,
+  start: `"${forever}" start ${opt} "${start}"`,
+  stop: `"${forever}" stop ${opt} "${start}"; node "${stop}"`,
 };
 
 // @ts-ignore

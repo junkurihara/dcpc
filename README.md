@@ -13,13 +13,13 @@ $ yarn global install dcpc
 
 Start `dnscrypt-proxy` by the following command.
 ```bash
-$ dcpc start
+$ sudo dcpc start
 ```
 
 Stop `dnscrypt-proxy` by the following command.
 
 ```bash
-$ dcpc stop
+$ sudo dcpc stop
 ```
 
 ## Libraries
