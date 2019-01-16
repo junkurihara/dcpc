@@ -18,7 +18,7 @@ const start = path.resolve(__dirname, '../dist/bin.start.js');
 const stop = path.resolve(__dirname, '../dist/bin.stop.js');
 const forever = path.resolve(__dirname, '../node_modules/.bin/forever');
 
-const opt = '-l /var/log/dcpc.log';
+const opt = '-l /var/log/dcpc.log -a';
 
 const map: object = {
   restart: `node "${stop}"; "${forever}" restart ${opt} "${start}"`,
