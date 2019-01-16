@@ -1,0 +1,38 @@
+{
+  "name": "dcpc",
+  "description": "A DNSCrypt-Proxy Client via Node.js",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "author": "Jun Kurihara",
+  "license": "MIT",
+  "private": true,
+  "bin": {
+    "dcpc": "dist/bin.js"
+  },
+  "scripts": {
+    "test": "nyc mocha --recursive $(find test -name '*.spec.ts')",
+    "test:bundle": "yarn webpack && cross-env TEST_ENV=bundle yarn test",
+    "tsc": "tsc --build ./tsconfig.json",
+    "build": "rm -rf ./dist && cross-env NODE_ENV=production yarn tsc",
+    "cleanup": "rm -rf ./dist coverage .nyc_output ./node_modules"
+  },
+  "devDependencies": {
+    "@types/chai": "4.1.7",
+    "@types/mocha": "5.2.5",
+    "@types/node": "10.12.18",
+    "chai": "4.2.0",
+    "cross-env": "5.2.0",
+    "mocha": "5.2.0",
+    "mocha-sinon": "2.1.0",
+    "nyc": "13.1.0",
+    "source-map-support": "0.5.10",
+    "ts-loader": "5.3.3",
+    "ts-node": "7.0.1",
+    "tslint": "5.12.1",
+    "typescript": "3.2.2"
+  },
+  "dependencies": {
+    "forever": "^0.15.3",
+    "sudo-prompt": "^8.2.5"
+  }
+}

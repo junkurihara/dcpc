@@ -1,0 +1,16 @@
+src/
+coverage/
+obsolete/
+test/
+yarn.lock
+yarn-error.log
+.tslint.json
+tsconfig.json
+.idea/
+.git/
+.gitignore
+.circleci/
+.vscode/
+.nyc_output/
+.nycrc
+renovate.json
