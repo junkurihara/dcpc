@@ -3,6 +3,7 @@
  */
 
 import sudo from 'sudo-prompt';
+import path from 'path';
 
 const name: string = 'dnscrypt proxy';
 // const icns: string = ''; // icns: '/Applications/Electron.app/Contents/Resources/Electron.icns', // (optional)
@@ -20,12 +21,16 @@ export default class {
     let cmd;
     switch (platform) {
       case 'darwin': {
-        cmd = './lib/macos/dnscrypt-proxy -config ./config/dnscrypt-proxy_darwin.toml';
+        const binary: string = path.resolve(__dirname, '../lib/macos/dnscrypt-proxy');
+        const config: string = path.resolve(__dirname, '../config/dnscrypt-proxy_darwin.toml');
+        cmd = `"${binary}" -config "${config}"`;
         break;
       }
       case 'linux': {
+        const config: string = path.resolve(__dirname, '../config/dnscrypt-proxy_linux.toml');
         if (arch === 'x64') {
-          cmd = './lib/linux-x86_64 -config ./config/dnscrypt-proxy_linux.toml';
+          const binary: string = path.resolve(__dirname, '../lib/linux-x86_64/dnscrypt-proxy');
+          cmd = `"${binary}" -config "${config}"`;
         } else {
           throw new Error('Unsupported architecture');
         }

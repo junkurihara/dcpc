@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import childProcess from 'child_process';
+import path from 'path';
 const execSync = childProcess.execSync;
 
 const cmdPattern =
@@ -13,11 +14,14 @@ if (argv == null || argv.length < 1) {
   throw new Error('Choose a command\n' + cmdPattern);
 }
 
-const dir = 'node_modules/dcpc/'; // ''
+const start = path.resolve(__dirname, '../dist/bin.start.js');
+const stop = path.resolve(__dirname, '../dist/bin.stop.js');
+const forever = path.resolve(__dirname, '../node_modules/.bin/forever');
+
 const map: object = {
-  restart: `node ${dir}dist/bin.stop.js; node_modules/.bin/forever restart ${dir}dist/bin.start.js`,
-  start: `node_modules/.bin/forever start ${dir}dist/bin.start.js`,
-  stop: `node_modules/.bin/forever stop ${dir}dist/bin.start.js; node ${dir}dist/bin.stop.js`,
+  restart: `node "${stop}"; "${forever}" restart "${start}"`,
+  start: `"${forever}" start "${start}"`,
+  stop: `"${forever}" stop "${start}"; node "${stop}"`,
 };
 
 // @ts-ignore
