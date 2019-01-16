@@ -50,6 +50,12 @@ export default class {
     return this.sexec(cmd, options);
   }
 
+  public stop_dnscrypt() {
+    const options = { name }; // or {name, icns}
+    const cmd = 'pgrep dnscrypt-proxy|xargs kill';
+    return this.sexec(cmd, options);
+  }
+
   // todo: this daemonize function should not be sudo?
   private sexec(cmd: string, options: object) {
     return new Promise( (resolve, reject) => {
