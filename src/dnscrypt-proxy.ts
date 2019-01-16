@@ -2,8 +2,8 @@
  * dnscrypt-proxy.ts
  */
 
-import sudo from 'sudo-prompt';
 import path from 'path';
+import sudo from 'sudo-prompt';
 
 const name: string = 'dnscrypt proxy';
 // const icns: string = ''; // icns: '/Applications/Electron.app/Contents/Resources/Electron.icns', // (optional)
@@ -21,7 +21,7 @@ export default class {
     let cmd;
     switch (platform) {
       case 'darwin': {
-        const binary: string = path.resolve(__dirname, '../lib/macos/dnscrypt-proxy');
+        const binary: string = path.resolve(__dirname, '../lib/darwin/dnscrypt-proxy');
         const config: string = path.resolve(__dirname, '../config/dnscrypt-proxy_darwin.toml');
         cmd = `"${binary}" -config "${config}"`;
         break;
