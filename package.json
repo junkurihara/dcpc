@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/junkurihara/dcpc/issues"
   },
-  "homepage": "https://github.com/junkurihara/dcpc/tree/master/packages/dcpc#readme",
+  "homepage": "https://github.com/junkurihara/dcpc",
   "keywords": [
     "dnscrypt",
     "doh",

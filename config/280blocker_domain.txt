@@ -7,7 +7,7 @@
 # Subdomain is not described. 
 # Please use it in a system that can block subdomains.
 #
-# Lastupdate: 2019-01-08
+# Lastupdate: 2019-01-16
 #
 
 googleadservices.com
@@ -197,7 +197,6 @@ af-110.com
 af.moshimo.com
 aff.jskyservices.com
 affil.jp
-affiliate-b.com
 affiliate.dtiserv.com
 affiliate.rakuten.co.jp
 affiliateone.jp
@@ -812,7 +811,6 @@ st.bebi.com
 go.bebi.com
 tsyndicate.com
 aoredi.com
-afi-b.com
 applvn.com
 onclickmega.com
 wa-track.com
@@ -1123,3 +1121,8 @@ l.betrad.com
 c.betrad.com
 cf.xad.com
 click.speee-ad.jp
+spotx.tv
+spotxchange-a.akamaihd.net
+stats.atrl.co
+cdn.connectad.io
+i.connectad.io
